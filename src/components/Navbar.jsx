@@ -1,5 +1,6 @@
 import React from "react";
 // import Navbar from '../../components/Navbar'
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -79,12 +80,20 @@ const Navbar = () => {
                 placeholder="Search"
                 aria-label="Search"
               /> */}
-              <button class="btn btn-outline-danger me-2" type="submit">
+              <Link
+                to={"/register"}
+                class="btn btn-outline-danger me-2"
+                type="submit"
+              >
                 Register
-              </button>
-              <button class="btn btn-outline-success" type="submit">
+              </Link>
+              <Link
+                to={"/login"}
+                class="btn btn-outline-success"
+                type="submit"
+              >
                 Login
-              </button>
+              </Link>
             </form>
           </div>
         </div>
