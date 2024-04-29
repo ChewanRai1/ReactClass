@@ -7,10 +7,12 @@ Route}from 'react-router-dom'
 import Homepage from './homepage/Homepage';
 import Login from './login/Login';
 import Register from './register/Register';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <Router>
+      <Navbar/>
       <Routes>
         <Route path = '/' element={<Homepage/>}/>
         <Route path = '/login' element={<Login/>}/>
