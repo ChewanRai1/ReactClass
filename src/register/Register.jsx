@@ -1,6 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Register = () => {
+  // Conding Section
+
+  //Make a state variables - 5 state
+  // Format (variableName, Changing VarName) = State
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
   return (
     // <div>
     //   <h1>Its Register</h1>
@@ -49,3 +60,8 @@ const Register = () => {
 };
 
 export default Register;
+
+//Make UI complete
+// Make a Variable to save value if each input temporarily
+// Change everytime we write something
+// submit
