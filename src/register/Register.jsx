@@ -12,6 +12,33 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  // Make a function to save the state
+  const handleFirstname = (e) => {
+    setFirstName(e.target.value);
+  };
+
+  const handleLastname = (e) => {
+    setLastName(e.target.value);
+  };
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleConfirmPassword = (e) => {
+    setConfirmPassword(e.target.value);
+  };
+
+  //For button
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(firstName, lastName, email, password, confirmPassword);
+  };
+
   return (
     // <div>
     //   <h1>Its Register</h1>
@@ -21,38 +48,45 @@ const Register = () => {
         <h1>Create an account</h1>
 
         <form className="w-50">
-          <label>Firstname</label>
+          <label>Firstname:{firstName}</label>
           <input
+            onChange={handleFirstname}
             type="text"
             className="form-control"
             placeholder="Enter your fistname"
           />
 
-          <label className="mt-2">Lastname</label>
+          <label className="mt-2">Lastname:{lastName}</label>
           <input
+            onChange={handleLastname}
             type="text"
             className="form-control"
             placeholder="Enter your lastname"
           />
-          <label className="mt-2">Email Address</label>
+          <label className="mt-2">Email Address: {email}</label>
           <input
+            onChange={handleEmail}
             type="email"
             className="form-control"
             placeholder="Enter your Email Address"
           />
-          <label className="mt-2">Password</label>
+          <label className="mt-2">Password:{password}</label>
           <input
+            onChange={handlePassword}
             type="text"
             className="form-control"
             placeholder="Enter your password"
           />
-          <label className="mt-2">Confirm Password</label>
+          <label className="mt-2">Confirm Password: {confirmPassword}</label>
           <input
+            onChange={handleConfirmPassword}
             type="text"
             className="form-control"
             placeholder="Enter your confirm password"
           />
-          <button className="btn btn-dark mt-2 w-100">Create Account</button>
+          <button onClick={handleSubmit} className="btn btn-dark mt-2 w-100">
+            Create Account
+          </button>
         </form>
       </div>
     </>
