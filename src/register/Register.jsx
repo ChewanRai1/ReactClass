@@ -12,6 +12,13 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  //Statw for error
+  const [firstNameError, setFirstNameError] = useState("");
+  const [lastNameError, setLastNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
+
   // Make a function to save the state
   const handleFirstname = (e) => {
     setFirstName(e.target.value);
@@ -33,9 +40,43 @@ const Register = () => {
     setConfirmPassword(e.target.value);
   };
 
+  //Validation
+  var validate = () => {
+    var isValid = true;
+    if (firstName.trim() === "") {
+      setFirstNameError("Please enter firstname");
+      isValid = false;
+    }
+    if (lastName.trim() === "") {
+      setLastNameError("Please enter lastname");
+      isValid = false;
+    }
+    if (email.trim() === "") {
+      setEmailError("Please enter email");
+      isValid = false;
+    }
+    if (password.trim() === "") {
+      setPasswordError("Please enter password");
+      isValid = false;
+    }
+    if (confirmPassword.trim() === "") {
+      setConfirmPasswordError("Please enter Confirm Password");
+      isValid = false;
+    }
+    if (password.trim() !== confirmPassword.trim()) {
+      setConfirmPasswordError("password did not match");
+      isValid = false;
+    }
+    return isValid;
+  };
+
   //For button
   const handleSubmit = (e) => {
     e.preventDefault();
+    var isValid = validate();
+    if (!isValid) {
+      return; //Stop the process
+    }
     console.log(firstName, lastName, email, password, confirmPassword);
   };
 
@@ -55,6 +96,9 @@ const Register = () => {
             className="form-control"
             placeholder="Enter your fistname"
           />
+          {firstNameError && (
+            <p className="text-danger">{firstNameError}</p> //<small>
+          )}
 
           <label className="mt-2">Lastname:{lastName}</label>
           <input
@@ -63,6 +107,9 @@ const Register = () => {
             className="form-control"
             placeholder="Enter your lastname"
           />
+          {lastNameError && (
+            <p className="text-danger">{lastNameError}</p> //<small>
+          )}
           <label className="mt-2">Email Address: {email}</label>
           <input
             onChange={handleEmail}
@@ -70,6 +117,9 @@ const Register = () => {
             className="form-control"
             placeholder="Enter your Email Address"
           />
+          {emailError && (
+            <p className="text-danger">{emailError}</p> //<small>
+          )}
           <label className="mt-2">Password:{password}</label>
           <input
             onChange={handlePassword}
@@ -77,6 +127,9 @@ const Register = () => {
             className="form-control"
             placeholder="Enter your password"
           />
+          {passwordError && (
+            <p className="text-danger">{passwordError}</p> //<small>
+          )}
           <label className="mt-2">Confirm Password: {confirmPassword}</label>
           <input
             onChange={handleConfirmPassword}
@@ -84,6 +137,9 @@ const Register = () => {
             className="form-control"
             placeholder="Enter your confirm password"
           />
+          {confirmPasswordError && (
+            <p className="text-danger">{confirmPasswordError}</p> //<small>
+          )}
           <button onClick={handleSubmit} className="btn btn-dark mt-2 w-100">
             Create Account
           </button>
