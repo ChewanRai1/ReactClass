@@ -8,6 +8,7 @@ import Homepage from './homepage/Homepage';
 import Login from './login/Login';
 import Register from './register/Register';
 import Navbar from './components/Navbar';
+import React from 'react';
 
 function App() {
   return (

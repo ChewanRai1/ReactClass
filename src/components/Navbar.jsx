@@ -10,9 +10,9 @@ const Navbar = () => {
     <>
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">
+          <Link class="navbar-brand" href="#">
             Helperhand
-          </a>
+          </Link>
           <button
             class="navbar-toggler"
             type="button"
@@ -27,14 +27,14 @@ const Navbar = () => {
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">
+                <Link class="nav-link active" aria-current="page" href="#">
                   Home
-                </a>
+                </Link>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <Link class="nav-link" href="#">
                   Products
-                </a>
+                </Link>
               </li>
               {/* <li class="nav-item dropdown">
                 <a
