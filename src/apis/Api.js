@@ -12,6 +12,9 @@ const Api = axios.create({
 //creating test api
 export const testApi =()=> Api.get('/test')
 
-//http://localhost:8000/test
-
 export const testApinew =()=> Api.get('/test_new')
+
+//creating register API
+export const registerUSerApi = (data) => Api.post('/api/user/create', data)
+
+//http://localhost:8000/test

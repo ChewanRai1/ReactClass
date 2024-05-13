@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { registerUSerApi } from "../apis/Api";
+import { toast } from "react-toastify";
 
 const Register = () => {
   // Conding Section
@@ -77,7 +79,26 @@ const Register = () => {
     if (!isValid) {
       return; //Stop the process
     }
-    console.log(firstName, lastName, email, password, confirmPassword);
+    // console.log(firstName, lastName, email, password, confirmPassword);
+    //making API request
+    //Making JSON Object of register data
+    const data = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+    };
+    registerUSerApi(data).then((res) => {
+      // console.log(res.data);
+      //Success: true/false, message
+      if (res.data.success === false) {
+        // Toast.error(res.data.message);
+        toast.error(res.data.message);
+      } else {
+        // Toast.success(res.data.message);
+        toast.success(res.data.message);
+      }
+    });
   };
 
   return (

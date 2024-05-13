@@ -10,10 +10,15 @@ import Register from './register/Register';
 import Navbar from './components/Navbar';
 import React from 'react';
 
+// Toast config
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
   return (
     <Router>
       <Navbar/>
+      <ToastContainer/>
       <Routes>
         <Route path = '/' element={<Homepage/>}/>
         <Route path = '/login' element={<Login/>}/>
