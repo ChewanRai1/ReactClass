@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import { testApinew } from "../apis/Api";
+import { loginUserApi, testApinew } from "../apis/Api";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const Login = () => {
   // useEffect(() => {
@@ -43,8 +44,23 @@ const Login = () => {
     if (!validation()) {
       return;
     }
-
-    console.log(email, password);
+    // console.log(email, password);
+    //Making json object
+    const data = {
+      email: email,
+      password: password,
+    };
+    //Making api request (same as register)
+    loginUserApi(data).then((res) => {
+      //Success: true/false, message
+      if (res.data.success === false) {
+        // Toast.error(res.data.message);
+        toast.error(res.data.message);
+      } else {
+        // Toast.success(res.data.message);
+        toast.success(res.data.message);
+      }
+    });
   };
 
   return (
