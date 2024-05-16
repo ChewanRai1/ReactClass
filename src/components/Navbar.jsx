@@ -3,6 +3,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  //get the user data
+  const user = JSON.parse(localStorage.getItem("user"));
   return (
     // <div>
     //   Navbar             //default
@@ -80,7 +82,7 @@ const Navbar = () => {
                 placeholder="Search"
                 aria-label="Search"
               /> */}
-              <Link
+              {/* <Link
                 to={"/register"}
                 class="btn btn-outline-danger me-2"
                 type="submit"
@@ -93,7 +95,55 @@ const Navbar = () => {
                 type="submit"
               >
                 Login
-              </Link>
+              </Link> */}
+              {user ? (
+                <>
+                  <div class="dropdown">
+                    <button
+                      class="btn btn-secondary dropdown-toggle"
+                      type="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      Welcome, {user.firstName}
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a class="dropdown-item" href="#">
+                          Profile
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#">
+                          Settings
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#">
+                          logout
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to={"/Register"}
+                    class="btn btn-outline-danger me-2"
+                    type="submit"
+                  >
+                    Register
+                  </Link>
+                  <Link
+                    to={"/Login"}
+                    class="btn btn-outline-success"
+                    type="submit"
+                  >
+                    Login
+                  </Link>
+                </>
+              )}
             </form>
           </div>
         </div>

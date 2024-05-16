@@ -59,6 +59,17 @@ const Login = () => {
       } else {
         // Toast.success(res.data.message);
         toast.success(res.data.message);
+
+        //Received data : success-bool, message.string, token-string, userdata-json
+
+        // 1. set token
+        localStorage.setItem("token", res.data.token);
+
+        //2.Convert json object
+        const convertedData = JSON.stringify(res.data.userData);
+
+        //3. set user data in local storage
+        localStorage.setItem("user", convertedData);
       }
     });
   };
