@@ -1,6 +1,12 @@
 import React from "react";
+import { useState } from "react";
 // jutyugik
 const AdminDashboard = () => {
+  const [productName, setProductName] = useState("");
+  const [productPrice, setProductPrice] = useState("");
+  const [productCategory, setProductCategory] = useState("");
+  const [productDescription, setProductDescription] = useState("");
+  const [productImage, setProductImage] = useState("");
   return (
     <div className="container">
       <div className="d-flex justify-content-between mt-2">
