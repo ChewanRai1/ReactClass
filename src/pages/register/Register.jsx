@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { registerUSerApi } from "../apis/Api";
+import { registerUSerApi } from "../../apis/Api";
 import { toast } from "react-toastify";
 
 const Register = () => {

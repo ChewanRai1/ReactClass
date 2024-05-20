@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { loginUserApi, testApinew } from "../apis/Api";
+import { loginUserApi, testApinew } from "../../apis/Api";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
