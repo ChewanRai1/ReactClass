@@ -6,7 +6,9 @@ const AdminDashboard = () => {
   const [productPrice, setProductPrice] = useState("");
   const [productCategory, setProductCategory] = useState("");
   const [productDescription, setProductDescription] = useState("");
-  const [productImage, setProductImage] = useState("");
+
+  const [productImage, setProductImage] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
   return (
     <div className="container">
       <div className="d-flex justify-content-between mt-2">
@@ -45,13 +47,15 @@ const AdminDashboard = () => {
                 <form action="">
                   <label>Product Name</label>
                   <input
+                    onChange={(e) => setProductName(e.target.value)}
                     type="text"
                     className="form-control"
                     placeholder="Enter product name"
                   ></input>
 
-                  <labe className="mt-2">Product Price</labe>
+                  <label className="mt-2">Product Price</label>
                   <input
+                    onChange={(e) => setProductPrice(e.target.value)}
                     type="text"
                     className="form-control"
                     placeholder="Enter product name"
@@ -59,7 +63,10 @@ const AdminDashboard = () => {
 
                   <div className="mt-2">
                     <label>Select Category</label>
-                    <select className="form-control">
+                    <select
+                      onChange={(e) => setProductCategory}
+                      className="form-control"
+                    >
                       <option value="flower">Plants</option>
                       <option value="gadgets">Gadgets</option>
                       <option value="electronics">Electronics</option>
@@ -67,10 +74,18 @@ const AdminDashboard = () => {
                     </select>
                   </div>
                   <label className="mt-2">Type product Description</label>
-                  <textarea className="form-control"></textarea>
+
+                  <textarea
+                    onChange={(e) => setProductDescription(e.target.value)}
+                    className="form-control"
+                  ></textarea>
 
                   <label className="mt-2">Product image</label>
-                  <input type="file" className="form-control"></input>
+                  <input
+                    onChange={handleImageUpload}
+                    type="file"
+                    className="form-control"
+                  ></input>
                 </form>
               </div>
               <div class="modal-footer">
