@@ -7,8 +7,29 @@ const AdminDashboard = () => {
   const [productCategory, setProductCategory] = useState("");
   const [productDescription, setProductDescription] = useState("");
 
+  //Image State
   const [productImage, setProductImage] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
+
+  //function to upload and preview image
+  const handleImageUpload = (event) => {
+    //0-file, 1-name, 2-size
+    const file = event.target.files[0];
+    setProductImage(file);
+    setPreviewImage(URL.createObjectURL(file));
+  };
+
+  //handle submit
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(
+      productName,
+      productPrice,
+      productCategory,
+      productDescription,
+      productImage
+    );
+  };
   return (
     <div className="container">
       <div className="d-flex justify-content-between mt-2">
@@ -86,6 +107,16 @@ const AdminDashboard = () => {
                     type="file"
                     className="form-control"
                   ></input>
+                  {/*Preview image*/}
+                  {previewImage && (
+                    <div className="mb-2">
+                      <img
+                        src={previewImage}
+                        alt="preview Image"
+                        className="img-fluid rounded object-fit-cover mt-3"
+                      ></img>
+                    </div>
+                  )}
                 </form>
               </div>
               <div class="modal-footer">
