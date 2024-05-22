@@ -127,7 +127,11 @@ const AdminDashboard = () => {
                 >
                   Close
                 </button>
-                <button type="button" class="btn btn-primary">
+                <button
+                  onClick={handleSubmit}
+                  type="button"
+                  class="btn btn-primary"
+                >
                   Save changes
                 </button>
               </div>
