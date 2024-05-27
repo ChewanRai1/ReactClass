@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import { createproductApi } from "../../apis/Api";
+import { toast } from "react-toastify";
 // jutyugik
 const AdminDashboard = () => {
   const [productName, setProductName] = useState("");
@@ -29,6 +31,35 @@ const AdminDashboard = () => {
       productDescription,
       productImage
     );
+
+    //make a logical form data
+    const formData = new FormData()
+    formData.append('productName', productName)
+    formData.append('productPrice', productPrice)
+    formData.append('productCategory', productCategory)
+    formData.append('productDescription', productDescription)
+    formData.append('productImage', productImage)
+
+    //make a api call/request
+    createproductApi(formData).then((res)=>{
+      if(res.status === 201){
+        toast.success(res.data.message)
+      }else{
+        toast.error("somthing went wrong in fornt end!")
+      }
+    }).catch((error)=>{
+      if(error.response){
+        if(error.response.status === 400){
+          toast.error(error.response.data.message)
+        }
+        //spaace for 401 error
+      }else if(error.response.status === 500){
+        toast.error("internal server error")
+      }else{
+        toast.error("No response!")
+      }
+
+    })
   };
   return (
     <div className="container">
@@ -85,7 +116,7 @@ const AdminDashboard = () => {
                   <div className="mt-2">
                     <label>Select Category</label>
                     <select
-                      onChange={(e) => setProductCategory}
+                      onChange={(e) => setProductCategory(e.target.value)}
                       className="form-control"
                     >
                       <option value="flower">Plants</option>
