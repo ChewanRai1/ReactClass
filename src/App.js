@@ -1,37 +1,34 @@
+import "./App.css";
 
-import './App.css';
-
-import {BrowserRouter as Router,
-Routes,
-Route}from 'react-router-dom'
-import Homepage from './pages/homepage/Homepage';
-import Login from './pages/login/Login';
-import Register from './pages/register/Register';
-import Navbar from './components/Navbar';
-import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Homepage from "./pages/homepage/Homepage";
+import Login from "./pages/login/Login";
+import Register from "./pages/register/Register";
+import Navbar from "./components/Navbar";
+import React from "react";
 
 // Toast config
-import { ToastContainer} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import AdminDashboard from './pages/admin/AdminDashboard';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminUpdate from "./pages/admin/AdminUpdate";
 
 function App() {
   return (
     <Router>
-      <Navbar/>
-      <ToastContainer/>
+      <Navbar />
+      <ToastContainer />
       <Routes>
-        <Route path = '/' element={<Homepage/>}/>
-        <Route path = '/login' element={<Login/>}/>
-        <Route path = '/register' element={<Register/>}/>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         {/* <Route path = '/register' element = {<h1>Register page</h1>} />
         <Route path = '/login' element = {<h1>login page</h1>} /> */}
-
         {/* Admin Routes */}
-        <Route path = '/admin/dashboard' element = {<AdminDashboard/>}/>     
-         </Routes>
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/update/:id" element={<AdminUpdate />} />
+      </Routes>
     </Router>
-
   );
 }
 

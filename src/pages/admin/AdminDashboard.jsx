@@ -1,9 +1,28 @@
 import React from "react";
-import { useState } from "react";
-import { createproductApi } from "../../apis/Api";
+import { useState, useEffect } from "react";
+import { createproductApi, getAllProducts } from "../../apis/Api";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 // jutyugik
 const AdminDashboard = () => {
+  //logic for get products
+  const [products, setProducts] = useState([]);
+  // Hit API (Get All Product) Auto -> useEffect (list of products)
+  useEffect(() => {
+    getAllProducts()
+      .then((res) => {
+        // success, message , list of products(product)
+        console.log(res.data.products);
+        setProducts(res.data.products);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  //Make a state to save (Array format)
+  // Table row (pn, pp, pd)
+
   const [productName, setProductName] = useState("");
   const [productPrice, setProductPrice] = useState("");
   const [productCategory, setProductCategory] = useState("");
@@ -33,33 +52,34 @@ const AdminDashboard = () => {
     );
 
     //make a logical form data
-    const formData = new FormData()
-    formData.append('productName', productName)
-    formData.append('productPrice', productPrice)
-    formData.append('productCategory', productCategory)
-    formData.append('productDescription', productDescription)
-    formData.append('productImage', productImage)
+    const formData = new FormData();
+    formData.append("productName", productName);
+    formData.append("productPrice", productPrice);
+    formData.append("productCategory", productCategory);
+    formData.append("productDescription", productDescription);
+    formData.append("productImage", productImage);
 
     //make a api call/request
-    createproductApi(formData).then((res)=>{
-      if(res.status === 201){
-        toast.success(res.data.message)
-      }else{
-        toast.error("somthing went wrong in fornt end!")
-      }
-    }).catch((error)=>{
-      if(error.response){
-        if(error.response.status === 400){
-          toast.error(error.response.data.message)
+    createproductApi(formData)
+      .then((res) => {
+        if (res.status === 201) {
+          toast.success(res.data.message);
+        } else {
+          toast.error("somthing went wrong in fornt end!");
         }
-        //spaace for 401 error
-      }else if(error.response.status === 500){
-        toast.error("internal server error")
-      }else{
-        toast.error("No response!")
-      }
-
-    })
+      })
+      .catch((error) => {
+        if (error.response) {
+          if (error.response.status === 400) {
+            toast.error(error.response.data.message);
+          }
+          //spaace for 401 error
+        } else if (error.response.status === 500) {
+          toast.error("internal server error");
+        } else {
+          toast.error("No response!");
+        }
+      });
   };
   return (
     <div className="container">
@@ -184,26 +204,34 @@ const AdminDashboard = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <img
-                  height={"40px"}
-                  width={"60px"}
-                  src="https://wallpapers.com/images/featured/tzhfez1w8ud2z8aw.jpg"
-                  alt="deadpool"
-                />
-              </td>
-              <td>Sunflower</td>
-              <td>Npr. 500</td>
-              <td>Superhero</td>
-              <td>Funny </td>
-              <td>
-                <div className="btn-group" role="group">
-                  <button className="btn btn-success">Edit</button>
-                  <button className="btn btn-danger">Delete</button>
-                </div>
-              </td>
-            </tr>
+            {products.map((singleProduct) => (
+              <tr>
+                <td>
+                  <img
+                    height={"40px"}
+                    width={"40px"}
+                    src={`http://localhost:8000/products/${singleProduct.productImage}`}
+                    alt=""
+                  />
+                </td>
+                <td>{singleProduct.productName}</td>
+                <td>NPR.{singleProduct.productPrice}</td>
+                <td>{singleProduct.productCategory}</td>
+                <td>{singleProduct.productDescription}</td>
+
+                <td>
+                  <div className="btn-group" role="group">
+                    <Link
+                      to={`/admin/update/${singleProduct._id}`}
+                      className="btn btn-success"
+                    >
+                      Edit
+                    </Link>
+                    <button className="btn btn-danger">Delete</button>
+                  </div>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
@@ -212,3 +240,13 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
+
+//New page (Update Prodiuct)
+// Form(required Filed) n,p,d,c, old image, new image
+// useState 7 -
+// Fill the previous values
+// 5. Call the API(single product)
+// 5.1 Backend
+// 5.2 Based on _id(Admin Dashboard)
+// transport '_id' to update product
+// recieved in update product page
