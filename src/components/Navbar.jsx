@@ -5,6 +5,12 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   //get the user data
   const user = JSON.parse(localStorage.getItem("user"));
+
+  //Logout function
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.href = "/login";
+  };
   return (
     // <div>
     //   Navbar             //default
@@ -119,9 +125,13 @@ const Navbar = () => {
                         </a>
                       </li>
                       <li>
-                        <a class="dropdown-item" href="#">
+                        <button
+                          onClick={handleLogout}
+                          class="dropdown-item"
+                          href="#"
+                        >
                           logout
-                        </a>
+                        </button>
                       </li>
                     </ul>
                   </div>

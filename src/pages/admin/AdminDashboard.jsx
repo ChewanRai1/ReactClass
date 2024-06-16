@@ -1,6 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { createproductApi, getAllProducts } from "../../apis/Api";
+import {
+  createproductApi,
+  deleteProduct,
+  getAllProducts,
+} from "../../apis/Api";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 // jutyugik
@@ -40,6 +44,28 @@ const AdminDashboard = () => {
     setPreviewImage(URL.createObjectURL(file));
   };
 
+  //delete Product
+  const handleDelete = (id) => {
+    const confirmDialog = window.confirm("Are you sure");
+    if (confirmDialog) {
+      //Delete Product
+      deleteProduct(id)
+        .then((res) => {
+          if (res.status === 201) {
+            toast.success(res.data.message);
+            window.location.reload();
+          }
+        })
+        .catch((error) => {
+          if (error.response.status === 500) {
+            toast.error(error.response.data.message);
+          } else if (error.response.status === 400) {
+            toast.error(error.response.data.message);
+          }
+        });
+    }
+  };
+
   //handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -65,7 +91,7 @@ const AdminDashboard = () => {
         if (res.status === 201) {
           toast.success(res.data.message);
         } else {
-          toast.error("somthing went wrong in fornt end!");
+          toast.error("something went wrong in fornt end!");
         }
       })
       .catch((error) => {
@@ -210,7 +236,7 @@ const AdminDashboard = () => {
                   <img
                     height={"40px"}
                     width={"40px"}
-                    src={`http://localhost:8000/products/${singleProduct.productImage}`}
+                    src={`http://localhost:8000/api/product/${singleProduct.productImage}`}
                     alt=""
                   />
                 </td>
@@ -227,7 +253,12 @@ const AdminDashboard = () => {
                     >
                       Edit
                     </Link>
-                    <button className="btn btn-danger">Delete</button>
+                    <button
+                      onClick={() => handleDelete(singleProduct._id)}
+                      className="btn btn-danger"
+                    >
+                      Delete
+                    </button>
                   </div>
                 </td>
               </tr>

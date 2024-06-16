@@ -2,8 +2,11 @@ import React, { useEffect } from "react";
 import { loginUserApi, testApinew } from "../../apis/Api";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate(); // Use useNavigate instead of useHistory
+
   // useEffect(() => {
   //   console.log("Hello login!!");
   //   //calling test API
@@ -70,6 +73,9 @@ const Login = () => {
 
         //3. set user data in local storage
         localStorage.setItem("user", convertedData);
+
+        //Redirect to homepage after login succesfully
+        navigate("/");
       }
     });
   };
