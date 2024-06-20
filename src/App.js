@@ -34,10 +34,9 @@ function App() {
         </Route>
 
         {/* Admin Routes */}
-        <Route element={<AdminRoutes />}>
+
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/update/:id" element={<AdminUpdate />} />
-        </Route>
       </Routes>
     </Router>
   );
