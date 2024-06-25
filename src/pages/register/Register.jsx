@@ -13,6 +13,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [phone, setPhone] = useState("");
 
   //Statw for error
   const [firstNameError, setFirstNameError] = useState("");
@@ -20,6 +21,7 @@ const Register = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
 
   // Make a function to save the state
   const handleFirstname = (e) => {
@@ -40,6 +42,9 @@ const Register = () => {
 
   const handleConfirmPassword = (e) => {
     setConfirmPassword(e.target.value);
+  };
+  const handlePhone = (e) => {
+    setPhone(e.target.value);
   };
 
   //Validation
@@ -65,6 +70,11 @@ const Register = () => {
       setConfirmPasswordError("Please enter Confirm Password");
       isValid = false;
     }
+    if (phone.trim() === "") {
+      setPhoneError("Please enter phone no");
+      isValid = false;
+    }
+
     if (password.trim() !== confirmPassword.trim()) {
       setConfirmPasswordError("password did not match");
       isValid = false;
@@ -87,6 +97,7 @@ const Register = () => {
       lastName: lastName,
       email: email,
       password: password,
+      phone: phone,
     };
     registerUSerApi(data).then((res) => {
       // console.log(res.data);
@@ -140,6 +151,16 @@ const Register = () => {
           />
           {emailError && (
             <p className="text-danger">{emailError}</p> //<small>
+          )}
+          <label className="mt-2">Phone number: {phone}</label>
+          <input
+            onChange={handlePhone}
+            type="phone"
+            className="form-control"
+            placeholder="Enter your Phone number"
+          />
+          {phoneError && (
+            <p className="text-danger">{phoneError}</p> //<small>
           )}
           <label className="mt-2">Password:{password}</label>
           <input
