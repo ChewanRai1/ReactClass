@@ -48,4 +48,11 @@ export const deleteProduct = (id) =>
 //update
 export const updateProduct = (id, data) =>
   Api.put(`/api/product/update_product/${id}`, data, config);
+
+//forgot password
+export const forgotPassword = (data) =>
+  Api.post("/api/user/forgot_password", data);
+
+//verify
+export const verifyOtp = (data) => Api.post("/api/user/verify_otp", data);
 //http://localhost:8000/test

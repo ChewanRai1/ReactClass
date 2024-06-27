@@ -15,6 +15,7 @@ import AdminUpdate from "./pages/admin/AdminUpdate";
 import AdminRoutes from "./pages/protected/AdminRoutes";
 import UserRoutes from "./pages/protected/UserRoutes";
 import Profile from "./pages/profile/Profile";
+import ForgotPassword from "./pages/forgot_password/ForgotPassword";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
         {/* <Route path = '/register' element = {<h1>Register page</h1>} />
         <Route path = '/login' element = {<h1>login page</h1>} /> */}
 
@@ -35,8 +37,11 @@ function App() {
 
         {/* Admin Routes */}
 
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="/admin/update/:id" element={<AdminUpdate />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/update/:id" element={<AdminUpdate />} />
+
+        {/* Forgot password */}
+        <Route path="/forgot_password" element={<ForgotPassword />} />
       </Routes>
     </Router>
   );
