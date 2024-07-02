@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const navigate = useNavigate(); // Use useNavigate instead of useHistory
+  // const navigate = useNavigate(); // Use useNavigate instead of useHistory
 
   // useEffect(() => {
   //   console.log("Hello login!!");
@@ -89,7 +89,7 @@ const Login = () => {
           onChange={(e) => setEmail(e.target.value)}
           type="email"
           className="form-control"
-          placeholder="Enter you email"
+          placeholder="Enter your email"
         ></input>
         {emailError && <p className="text-danger">{emailError}</p>}
 
@@ -98,7 +98,7 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           type="password"
           className="form-control"
-          placeholder="Enter you password"
+          placeholder="Enter your password"
         ></input>
         {passwordError && <p className="text-danger">{passwordError}</p>}
         <button onClick={handleLogin} className="btn btn-danger w-100 mt-2">
